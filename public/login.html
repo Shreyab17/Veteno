@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Signup page</title>
+    <link rel="stylesheet" href="./login.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-toggle">
+            <button id="login-btn" onclick="toggleForm('login')">Login</button>
+            <button id="signup-btn" onclick="toggleForm('signup')">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="form-content">
+            <h2>Login</h2>
+            <form id="loginForm" action="/login" method="POST">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Login</button>
+                </div>
+                <div id="login-message" class="message"></div>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form" class="form-content">
+            <h2>Sign Up</h2>
+            <form id="signupForm" action="/signup" method="POST">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirmPassword" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Sign Up</button>
+                </div>
+                <div id="signup-message" class="message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(form) {
+            document.getElementById('login-form').style.display = form === 'login' ? 'block' : 'none';
+            document.getElementById('signup-form').style.display = form === 'signup' ? 'block' : 'none';
+        }
+
+        // By default, show the login form
+        toggleForm('login');
+
+        // Example code to handle displaying messages
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from submitting
+            // Simulate checking user credentials
+            const email = document.getElementById('login-email').value;
+            const messageBox = document.getElementById('login-message');
+            if (email === "user@alreadyregistered.com") {
+                messageBox.textContent = "User already registered!";
+                messageBox.style.color = "red";
+            } else {
+                messageBox.textContent = "Login successful!";
+                messageBox.style.color = "green";
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from submitting
+            // Simulate user registration
+            const email = document.getElementById('signup-email').value;
+            const messageBox = document.getElementById('signup-message');
+            if (email === "user@alreadyregistered.com") {
+                messageBox.textContent = "User already registered!";
+                messageBox.style.color = "red";
+            } else {
+                messageBox.textContent = "Sign up successful!";
+                messageBox.style.color = "green";
+            }
+        });
+    </script>
+</body>
+</html>
